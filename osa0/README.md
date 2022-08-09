@@ -1,4 +1,4 @@
-#Fullstack osa 0 - Tehtävät
+# Fullstack osa 0 - Tehtävät
 
 - [x] 0.1: HTML
 - [x] 0.2: CSS
