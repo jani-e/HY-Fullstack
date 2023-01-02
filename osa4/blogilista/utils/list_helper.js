@@ -1,7 +1,11 @@
 const lodash = require('lodash')
 
 const dummy = (blogs) => {
-    return 1
+    if (blogs.length === 1) {
+        return blogs.length
+    } else {
+        return 1
+    }
 }
 
 const totalLikes = (blogs) => {
@@ -39,7 +43,7 @@ const mostBlogs = (blogs) => {
         author: lastAuthor[0],
         blogs: lastAuthor[1]
     }
-    
+
     return mostBlogs
 }
 

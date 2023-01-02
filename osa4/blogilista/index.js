@@ -5,5 +5,5 @@ const { info } = require('./utils/logger')
 const server = http.createServer(app)
 
 server.listen(PORT, () => {
-  info(`Server running on port ${PORT}`)
+    info(`Server running on port ${PORT}`)
 })
