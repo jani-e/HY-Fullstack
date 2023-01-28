@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import Notificaton from './components/Notification'
+import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
@@ -9,16 +10,21 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+
   const [message, setMessage] = useState(null)
   const [messageStatus, setMessageStatus] = useState(null)
 
+  const [blogCreationVisible, setBlogCreationVisible] = useState(false)
+
+  const hideWhenVisible = { display: blogCreationVisible ? 'none' : '' }
+  const showWhenVisible = { display: blogCreationVisible ? '' : 'none' }
+
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs(blogs)
-    )
+    blogService
+      .getAll()
+      .then(blogs => setBlogs(blogs
+        .sort((a, b) => b.likes - a.likes))
+      )
   }, [])
 
   useEffect(() => {
@@ -46,14 +52,14 @@ const App = () => {
       setTimeout(() => {
         setMessage(null)
         setMessageStatus(null)
-      }, 3000);
+      }, 3000)
     } catch (exception) {
       setMessage('wrong username or password')
       setMessageStatus('fail')
       setTimeout(() => {
         setMessage(null)
         setMessageStatus(null)
-      }, 3000);
+      }, 3000)
     }
   }
 
@@ -65,35 +71,73 @@ const App = () => {
     setTimeout(() => {
       setMessage(null)
       setMessageStatus(null)
-    }, 3000);
+    }, 3000)
   }
 
-  const handleCreateBlog = async (event) => {
-    event.preventDefault()
+  const addBlog = async (blogObject) => {
     try {
-      const newBlog = await blogService.create({
-        title, author, url
-      })
-      setBlogs([...blogs, newBlog])
-      setTitle('')
-      setAuthor('')
-      setUrl('')
-      setMessage(`a new blog ${title} by ${author} added`)
+      const newBlog = await blogService.create(blogObject)
+      setBlogs(blogs.concat(newBlog))
+      setMessage(`a new blog ${newBlog.title} by ${newBlog.author} added`)
       setMessageStatus('success')
       setTimeout(() => {
         setMessage(null)
         setMessageStatus(null)
-      }, 3000);
+      }, 3000)
     } catch (exception) {
       setMessage(`blog creation failed: ${exception.response.statusText}`)
       setMessageStatus('fail')
       setTimeout(() => {
         setMessage(null)
         setMessageStatus(null)
-      }, 3000);
+      }, 3000)
     }
-
+    setBlogCreationVisible(false)
   }
+
+  const handleLike = async (blog) => {
+    try {
+      const newBlog = {
+        ...blog,
+        likes: blog.likes + 1
+      }
+      await blogService.update(blog.id, newBlog)
+      setBlogs(blogs
+        .map(originalBlog => originalBlog.id !== blog.id ? originalBlog : newBlog)
+        .sort((a, b) => b.likes - a.likes))
+    } catch (exception) {
+      setMessage(`blog update failed: ${exception.response.statusText}`)
+      setMessageStatus('fail')
+      setTimeout(() => {
+        setMessage(null)
+        setMessageStatus(null)
+      }, 3000)
+    }
+  }
+
+  const deleteBlog = async (blogObject) => {
+    if (!(window.confirm(`Remove blog ${blogObject.title} by ${blogObject.author}`))) {
+      return null
+    }
+    try {
+      await blogService.remove(blogObject.id)
+      setMessage(`blog ${blogObject.title} removed!`)
+      setMessageStatus('success')
+      setTimeout(() => {
+        setMessage(null)
+        setMessageStatus(null)
+      }, 3000)
+      setBlogs(blogs.filter(blog => blogObject.id !== blog.id))
+    } catch (exception) {
+      setMessage(`blog deletion failed: ${exception.response.statusText}`)
+      setMessageStatus('fail')
+      setTimeout(() => {
+        setMessage(null)
+        setMessageStatus(null)
+      }, 3000)
+    }
+  }
+
 
   if (user === null) {
     return (
@@ -118,21 +162,15 @@ const App = () => {
       <h2>blogs</h2>
       <Notificaton messageStatus={messageStatus} text={message} />
       <p>{user.name} logged in <button onClick={handleLogout}>logout</button></p>
-      <h2>create new</h2>
-      <form onSubmit={handleCreateBlog}>
-        <div>title:
-          <input type="text" value={title} name="title" onChange={({ target }) => setTitle(target.value)} />
-        </div>
-        <div>author:
-          <input type="text" value={author} name="author" onChange={({ target }) => setAuthor(target.value)} />
-        </div>
-        <div>url:
-          <input type="text" value={url} name="url" onChange={({ target }) => setUrl(target.value)} />
-        </div>
-        <button>create</button>
-      </form>
+      <div style={hideWhenVisible}>
+        <button onClick={() => setBlogCreationVisible(true)}>new note</button>
+      </div>
+      <div style={showWhenVisible}>
+        <BlogForm createBlog={addBlog} />
+        <button onClick={() => setBlogCreationVisible(false)}>cancel</button>
+      </div>
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} handleLike={handleLike} deleteBlog={deleteBlog} user={user} />
       )}
     </div>
   )
