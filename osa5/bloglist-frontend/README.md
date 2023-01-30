@@ -16,4 +16,11 @@ time: 2,5 h
 - [x] 5.11: blogilistan frontend, step11
 - [x] 5.12: blogilistan frontend, step12    
 
-time: 10 h
+time: 7,5 h
+
+- [x] 5.13: blogilistan testit, step1
+- [x] 5.14: blogilistan testit, step2
+- [x] 5.15: blogilistan testit, step3
+- [x] 5.16: blogilistan testit, step4
+
+time: 3 h
