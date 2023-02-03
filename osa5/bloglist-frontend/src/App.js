@@ -77,7 +77,7 @@ const App = () => {
   const addBlog = async (blogObject) => {
     try {
       const newBlog = await blogService.create(blogObject)
-      setBlogs(blogs.concat(newBlog))
+      setBlogs(blogs.concat({ ...newBlog, user: user }))
       setMessage(`a new blog ${newBlog.title} by ${newBlog.author} added`)
       setMessageStatus('success')
       setTimeout(() => {
@@ -146,12 +146,12 @@ const App = () => {
         <Notificaton messageStatus={messageStatus} text={message} />
         <form onSubmit={handleLogin}>
           <div>username
-            <input type="text" value={username} name="username" onChange={({ target }) => setUsername(target.value)} />
+            <input type="text" value={username} id="username" name="username" onChange={({ target }) => setUsername(target.value)} />
           </div>
           <div>password
-            <input type="password" value={password} name="password" onChange={({ target }) => setPassword(target.value)} />
+            <input type="password" value={password} id="password" name="password" onChange={({ target }) => setPassword(target.value)} />
           </div>
-          <button>login</button>
+          <button type="submit" id="login">login</button>
         </form>
       </div>
     )

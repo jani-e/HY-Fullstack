@@ -24,3 +24,13 @@ time: 7,5 h
 - [x] 5.16: blogilistan testit, step4
 
 time: 3 h
+
+- [x] 5.17: blogilistan end to end -testit, step1
+- [x] 5.18: blogilistan end to end -testit, step2
+- [x] 5.19: blogilistan end to end -testit, step3
+- [x] 5.20: blogilistan end to end -testit, step4
+- [x] 5.21: blogilistan end to end -testit, step5
+- [x] 5.22: blogilistan end to end -testit, step6
+- [x] 5.23: blogilistan end to end -testit, step6
+
+time: 5 h
