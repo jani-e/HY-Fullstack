@@ -12,9 +12,9 @@
 time: 4 h
 
 - [x] 6.9 paremmat anekdootit, step7
-- [ ] 6.10 anekdootit, step8
-- [ ] 6.11 anekdootit, step9
-- [ ] 6.12 anekdootit, step10
-- [ ] 6.13 paremmat anekdootit, step11
+- [x] 6.10 anekdootit, step8
+- [x] 6.11 anekdootit, step9
+- [x] 6.12 anekdootit, step10
+- [x] 6.13 paremmat anekdootit, step11
 
-time: 1 h
+time: 5 h
