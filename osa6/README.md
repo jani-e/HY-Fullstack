@@ -18,3 +18,12 @@ time: 4 h
 - [x] 6.13 paremmat anekdootit, step11
 
 time: 5 h
+
+- [x] 6.14 anekdootit ja backend, step1
+- [x] 6.15 anekdootit ja backend, step2
+- [x] 6.16 anekdootit ja backend, step3
+- [x] 6.17 anekdootit ja backend, step4
+- [x] 6.18 anekdootit ja backend, step5
+- [x] 6.19 anekdootit ja backend, step6
+
+time: 4 h
