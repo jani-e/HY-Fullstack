@@ -27,3 +27,11 @@ time: 5 h
 - [x] 6.19 anekdootit ja backend, step6
 
 time: 4 h
+
+- [x] Tehtävä 6.20
+- [x] Tehtävä 6.21
+- [x] Tehtävä 6.22
+- [x] Tehtävä 6.23
+- [x] Tehtävä 6.24
+
+time: 6 h
