@@ -1,0 +1,42 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "content": "custom hooks are awesome"
+    },
+    {
+      "id": 2,
+      "content": "best feature ever <3"
+    },
+    {
+      "content": "custom note",
+      "id": 3
+    },
+    {
+      "content": "noooootes",
+      "id": 4
+    }
+  ],
+  "persons": [
+    {
+      "id": 1,
+      "name": "Dummy data",
+      "number": "020-10066666"
+    },
+    {
+      "id": 2,
+      "name": "Refused to share name",
+      "number": "000-1004000"
+    },
+    {
+      "name": "Unidentified Person",
+      "number": "040-77889910",
+      "id": 3
+    },
+    {
+      "name": "fghfg",
+      "number": "hfghfgh",
+      "id": 4
+    }
+  ]
+}
